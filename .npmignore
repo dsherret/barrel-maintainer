@@ -1,0 +1,15 @@
+/.vs
+/node_modules
+/coverage
+/.vscode
+/.nyc_output
+/dist/tests
+/src
+*.js.map
+/obj
+/temp
+/bin
+*.suo
+*.csproj
+*.csproj.user
+*.sln

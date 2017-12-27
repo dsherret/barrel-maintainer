@@ -1,0 +1,16 @@
+/node_modules
+/.vscode
+/.nyc_output
+*.js.map
+/obj
+/temp
+/bin
+*.suo
+*.csproj
+*.csproj.user
+*.sln
+/coverage
+/.vs
+/dist
+/docs/Gemfile.lock
+/docs/_site

@@ -1,0 +1,43 @@
+{
+  "name": "barrel-maintainer",
+  "version": "1.0.0",
+  "description": "Automatic maintenance of barrels in ES2015.",
+  "main": "dist/index.js",
+  "bin": {
+    "barrel-maintainer": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "tslint src/**/*.ts",
+    "test": "npm run build && nyc --reporter=html --reporter=text mocha dist/tests/**/*.js && npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dsherret/barrel-maintainer.git"
+  },
+  "keywords": [
+    "code-generation",
+    "code-manipulation"
+  ],
+  "author": "David Sherret",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dsherret/barrel-maintainer/issues"
+  },
+  "homepage": "https://github.com/dsherret/barrel-maintainer#readme",
+  "dependencies": {
+    "chokidar": "^1.7.0",
+    "ts-simple-ast": "^5.2.0",
+    "typescript": "^2.6.2"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.10",
+    "@types/chokidar": "^1.7.4",
+    "@types/mocha": "^2.2.45",
+    "@types/node": "^8.5.2",
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "nyc": "^11.4.1",
+    "tslint": "^5.8.0"
+  }
+}
