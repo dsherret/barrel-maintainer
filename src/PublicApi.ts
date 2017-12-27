@@ -1,4 +1,4 @@
-import Ast, {QuoteType} from "ts-simple-ast";
+import Ast, {QuoteType, NewLineKind} from "ts-simple-ast";
 import * as path from "path";
 import * as pathUtils from "./utils/pathUtils";
 import {BarrelMaintainer} from "./BarrelMaintainer";
@@ -46,6 +46,8 @@ export function getAst(dirPath: string, options: Options) {
     const ast = new Ast({ compilerOptions: { allowJs: true } });
     if (options.quoteType === "'")
         ast.manipulationSettings.set({ quoteType: QuoteType.Single });
-    ast.addExistingSourceFiles(path.join(dirPath, "**/*.{js,ts}"));
+    if (options.newLineType === "\r\n")
+        ast.manipulationSettings.set({ newLineKind: NewLineKind.CarriageReturnLineFeed });
+    ast.addExistingSourceFiles(path.join(dirPath, "**/*.{js,ts,jsx,tsx}"));
     return ast;
 }

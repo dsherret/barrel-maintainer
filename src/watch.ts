@@ -4,8 +4,7 @@ import {FileSystemRefreshResult, Directory} from "ts-simple-ast";
 import {BarrelMaintainer} from "./BarrelMaintainer";
 
 export function watch(rootDir: Directory, directory: Directory, maintainer: BarrelMaintainer) {
-    console.log(`Watching files in '${directory.getPath()}'...`);
-    const watcher = chokidar.watch(path.join(directory.getPath(), "**/*.{ts,js}")).on("all", async (event: string, path: string) => {
+    const watcher = chokidar.watch(path.join(directory.getPath(), "**/*.{ts,js,tsx,jsx}")).on("all", async (event: string, path: string) => {
         const sourceFile = directory.getSourceFile(path) || directory.addSourceFileIfExists(path);
         if (sourceFile == null)
             return;
