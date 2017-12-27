@@ -1,30 +1,24 @@
 import * as chokidar from "chokidar";
 import * as path from "path";
-import Ast, {FileSystemRefreshResult} from "ts-simple-ast";
-import {BarrelMaintainer, BarrelMaintainerOptions} from "./BarrelMaintainer";
+import {FileSystemRefreshResult, Directory} from "ts-simple-ast";
+import {BarrelMaintainer} from "./BarrelMaintainer";
 
-export function watch(ast: Ast, options: BarrelMaintainerOptions) {
-    const rootDir = ast.getRootDirectories()[0];
-    if (rootDir == null)
-        throw new Error("Could not find a root directory.");
-
-    const maintainer = new BarrelMaintainer(rootDir, options);
-
-    console.log(`Watching files in '${rootDir.getPath()}'...`);
-    const watcher = chokidar.watch(path.join(rootDir.getPath(), "**/*.{ts,js}")).on("all", async (event: string, path: string) => {
-        const sourceFile = ast.getSourceFile(path) || ast.addSourceFileIfExists(path);
+export function watch(rootDir: Directory, directory: Directory, maintainer: BarrelMaintainer) {
+    console.log(`Watching files in '${directory.getPath()}'...`);
+    const watcher = chokidar.watch(path.join(directory.getPath(), "**/*.{ts,js}")).on("all", async (event: string, path: string) => {
+        const sourceFile = directory.getSourceFile(path) || directory.addSourceFileIfExists(path);
         if (sourceFile == null)
             return;
 
-        const directory = sourceFile.getDirectory();
-        const dirPath = directory.getPath();
+        const dirToUpdate = sourceFile.getDirectory();
+        const dirToUpdatePath = dirToUpdate.getPath();
         const result = await sourceFile.refreshFromFileSystem();
         switch (result) {
             case FileSystemRefreshResult.Updated:
             case FileSystemRefreshResult.Deleted:
-                maintainer.updateDir(directory);
-                ast.saveUnsavedSourceFiles();
-                console.log(`Updated ${dirPath}`);
+                maintainer.updateDir(dirToUpdate);
+                rootDir.saveUnsavedSourceFiles();
+                console.log(`Updated ${dirToUpdatePath}`);
                 break;
         }
     });
