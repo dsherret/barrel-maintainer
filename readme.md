@@ -19,11 +19,11 @@ Arguments:
 * `--singleQuotes` - Use single quotes instead of double.
 * `--includeRootDir` - Create a barrel in the root directory.
 * File extension for barrel (defaults to what's being used most in the project)
-** `--ts` - Create index.ts files.
-** `--js` - Create index.js files.
+    * `--ts` - Create index.ts files.
+    * `--js` - Create index.js files.
 * New lines (default to --crlf on windows and --lf elsewhere)
-** `--crlf` - Use carriage return line feed newlines.
-** `--lf` - Use line feed newlines.
+    * `--crlf` - Use carriage return line feed newlines.
+    * `--lf` - Use line feed newlines.
 
 ## Api
 
