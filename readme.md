@@ -1,5 +1,7 @@
 # Barrel Maintainer
 
+[![npm version](https://badge.fury.io/js/barrel-maintainer.svg)](https://badge.fury.io/js/barrel-maintainer)
+
 Automatically maintains [barrels](https://angular.io/guide/glossary#barrel) in real-time.
 
 ## Installation
@@ -18,12 +20,23 @@ Arguments:
 
 * `--singleQuotes` - Use single quotes instead of double.
 * `--includeRootDir` - Create a barrel in the root directory.
-* File extension for barrel (defaults to what's being used most in the project)
-    * `--ts` - Create index.ts files.
-    * `--js` - Create index.js files.
-* New lines (default to --crlf on windows and --lf elsewhere)
-    * `--crlf` - Use carriage return line feed newlines.
-    * `--lf` - Use line feed newlines.
+* File extension for barrel (specify one)
+    * `--ts` - Create index.ts files (default if there are more ts files in project)
+    * `--js` - Create index.js files (default if there are more js files in project)
+* New lines (specify one)
+    * `--crlf` - Use carriage return line feed newlines (default on windows)
+    * `--lf` - Use line feed newlines (default elsewhere)
+
+## Ignoring Files
+
+Add a `/* barrel:ignore */` statement to the file:
+
+```ts
+/* barrel:ignore */
+export function log(message: string) {
+    console.log(message);
+}
+```
 
 ## Api
 
