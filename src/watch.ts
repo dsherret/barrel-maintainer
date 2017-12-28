@@ -1,9 +1,9 @@
 import * as chokidar from "chokidar";
 import * as path from "path";
 import {FileSystemRefreshResult, Directory} from "ts-simple-ast";
-import {BarrelMaintainer} from "./BarrelMaintainer";
+import {Maintainer} from "./Maintainer";
 
-export function watch(rootDir: Directory, directory: Directory, maintainer: BarrelMaintainer) {
+export function watch(rootDir: Directory, directory: Directory, maintainer: Maintainer) {
     const watcher = chokidar.watch(path.join(directory.getPath(), "**/*.{ts,js,tsx,jsx}")).on("all", async (event: string, path: string) => {
         const sourceFile = directory.getSourceFile(path) || directory.addSourceFileIfExists(path);
         if (sourceFile == null)

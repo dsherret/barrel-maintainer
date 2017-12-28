@@ -2,16 +2,16 @@ import * as ts from "typescript";
 import Ast, {SourceFile, Directory, TypeGuards} from "ts-simple-ast";
 import {determineFileExtension} from "./utils";
 
-export interface BarrelMaintainerOptions {
+export interface MaintainerOptions {
     includeRootDir?: boolean;
     fileExtension?: "ts" | "js";
 }
 
-export class BarrelMaintainer {
+export class Maintainer {
     private readonly barrelFileName: string;
     private readonly includeRootDir: boolean;
 
-    constructor(private readonly rootDir: Directory, options: BarrelMaintainerOptions) {
+    constructor(private readonly rootDir: Directory, options: MaintainerOptions) {
         this.includeRootDir = options.includeRootDir || false;
         this.barrelFileName = `index.${options.fileExtension || determineFileExtension(rootDir)}`;
     }

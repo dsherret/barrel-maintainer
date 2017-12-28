@@ -1,7 +1,7 @@
 import Ast, {QuoteType, NewLineKind} from "ts-simple-ast";
 import * as path from "path";
 import * as pathUtils from "./utils/pathUtils";
-import {BarrelMaintainer} from "./BarrelMaintainer";
+import {Maintainer} from "./Maintainer";
 import {Options} from "./Options";
 import {watch} from "./watch";
 
@@ -29,7 +29,7 @@ export class PublicApi {
         const ast = getAst(this.rootDirPath, this.options);
         const dir = ast.addExistingDirectory(dirPath);
         const rootDir = ast.getRootDirectories()[0];
-        const maintainer = new BarrelMaintainer(rootDir, this.options);
+        const maintainer = new Maintainer(rootDir, this.options);
 
         return {ast, dir, rootDir, maintainer};
     }

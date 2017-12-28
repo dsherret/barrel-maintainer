@@ -1,15 +1,15 @@
 import {expect} from "chai";
 import Ast, {Directory, QuoteType} from "ts-simple-ast";
-import {BarrelMaintainer} from "./../BarrelMaintainer";
+import {Maintainer} from "./../Maintainer";
 
-describe("BarrelMaintainer", () => {
+describe("Maintainer", () => {
     function setup(opts: { fileExtension?: "ts" | "js"; quoteStyle?: "\"" | "'"; includeRootDir?: boolean; } = {}) {
         const {fileExtension = "ts", quoteStyle, includeRootDir} = opts;
         const ast = new Ast({ useVirtualFileSystem: true });
         if (quoteStyle === "'")
             ast.manipulationSettings.set({ quoteType: QuoteType.Single });
         const rootDir = ast.createDirectory("rootDir");
-        const maintainer = new BarrelMaintainer(rootDir, { fileExtension, includeRootDir });
+        const maintainer = new Maintainer(rootDir, { fileExtension, includeRootDir });
         return {ast, rootDir, maintainer};
     }
 
@@ -32,7 +32,7 @@ describe("BarrelMaintainer", () => {
             const ast = new Ast({ useVirtualFileSystem: true });
             const rootDir = ast.createDirectory("dir");
             rootDir.createSourceFile("dir/file.ts", "");
-            const maintainer = new BarrelMaintainer(rootDir, {});
+            const maintainer = new Maintainer(rootDir, {});
             maintainer.updateDir(rootDir);
 
             it("should have the correct files", () => {
