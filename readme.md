@@ -2,8 +2,6 @@
 
 [![npm version](https://badge.fury.io/js/barrel-maintainer.svg)](https://badge.fury.io/js/barrel-maintainer)
 
-Automatically maintains [barrels](https://angular.io/guide/glossary#barrel) in real-time.
-
 ## Installation
 
 ```bash

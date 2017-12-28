@@ -1,7 +1,7 @@
 {
   "name": "barrel-maintainer",
   "version": "1.0.0",
-  "description": "Automatic maintenance of barrels in ES2015.",
+  "description": "Automatic real-time maintenance of barrels in ES2015.",
   "main": "dist/index.js",
   "bin": {
     "barrel-maintainer": "dist/cli.js"
