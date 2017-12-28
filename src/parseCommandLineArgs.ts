@@ -1,9 +1,9 @@
 import * as path from "path";
 import * as os from "os";
-import {Options} from "./Options";
+import {CommandLineOptions} from "./CommandLineOptions";
 import * as minimist from "minimist";
 
-export function parseCommandLineArgs(args: string[]): Options & { path: string; } {
+export function parseCommandLineArgs(args: string[]): CommandLineOptions {
     const argv = minimist(args);
 
     return {
@@ -11,7 +11,9 @@ export function parseCommandLineArgs(args: string[]): Options & { path: string; 
         fileExtension: getFileExtension(),
         newLineType: getNewLineType(),
         quoteType: getQuoteType(),
-        includeRootDir: argv.hasOwnProperty("includeRootDir")
+        includeRootDir: argv.hasOwnProperty("includeRootDir"),
+        showHelp: argv.hasOwnProperty("h") || argv.hasOwnProperty("help"),
+        showVersion: argv.hasOwnProperty("v") || argv.hasOwnProperty("version")
     };
 
     function getPath() {

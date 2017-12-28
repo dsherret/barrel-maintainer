@@ -1,7 +1,7 @@
 import {expect} from "chai";
 import * as path from "path";
 import * as os from "os";
-import {Options} from "./../Options";
+import {CommandLineOptions} from "./../CommandLineOptions";
 import {parseCommandLineArgs} from "./../parseCommandLineArgs";
 
 describe("parseCommandLineArgs", () => {
@@ -9,7 +9,7 @@ describe("parseCommandLineArgs", () => {
         expect(() => parseCommandLineArgs(args.split(" "))).to.throw();
     }
 
-    function doTest(args: string, expected: Options & { path?: string; }) {
+    function doTest(args: string, expected: Partial<CommandLineOptions>) {
         const result = parseCommandLineArgs(args.split(" "));
         if (expected.path == null)
             expect(result.path).to.equal(path.resolve());
@@ -20,6 +20,8 @@ describe("parseCommandLineArgs", () => {
             .equal(expected.newLineType || (os.platform() === "win32" ? "\r\n" : "\n"));
         expect(result.quoteType).to.equal(expected.quoteType);
         expect(result.includeRootDir).to.equal(expected.includeRootDir || false);
+        expect(result.showHelp).to.equal(expected.showHelp || false);
+        expect(result.showVersion).to.equal(expected.showVersion || false);
     }
 
     it("should return the defaults when not specified", () => {
@@ -75,6 +77,26 @@ describe("parseCommandLineArgs", () => {
     describe("includeRootDir", () => {
         it("should include the root dir when specifying", () => {
             doTest("--includeRootDir", { includeRootDir: true });
+        });
+    });
+
+    describe("showVersion", () => {
+        it("should show the version when specified short form", () => {
+            doTest("-v", { showVersion: true });
+        });
+
+        it("should show the version when specified long form", () => {
+            doTest("--version", { showVersion: true });
+        });
+    });
+
+    describe("showHelp", () => {
+        it("should show the help when specified short form", () => {
+            doTest("-h", { showHelp: true });
+        });
+
+        it("should show the version when specified long form", () => {
+            doTest("--help", { showHelp: true });
         });
     });
 });

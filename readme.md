@@ -13,16 +13,20 @@ npm install -g barrel-maintainer
 ## Usage
 
 ```bash
-barrel-maintainer [optional-path]
+barrel-maintainer [options] [path]
 ```
 
-Arguments:
+Options:
 
-* `--singleQuotes` - Use single quotes instead of double.
 * `--includeRootDir` - Create a barrel in the root directory.
+* Quote type (specify one)
+    * Defaults to the quote type used in the first found import declaration in your project.
+    * `--singleQuotes` - Use single quotes.
+    * `--doubleQuotes` - Use double quotes.
 * File extension for barrel (specify one)
-    * `--ts` - Create index.ts files (default if there are more ts files in project)
-    * `--js` - Create index.js files (default if there are more js files in project)
+    * Defaults to whichever file type your project has more of.
+    * `--ts` - Create index.ts files.
+    * `--js` - Create index.js files.
 * New lines (specify one)
     * `--crlf` - Use carriage return line feed newlines (default on windows)
     * `--lf` - Use line feed newlines (default elsewhere)

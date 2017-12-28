@@ -4,6 +4,7 @@ import * as pathUtils from "./utils/pathUtils";
 import {Maintainer} from "./Maintainer";
 import {Options} from "./Options";
 import {watch} from "./watch";
+import {determineQuoteType} from "./utils";
 
 export class PublicApi {
     private readonly rootDirPath: string;
@@ -44,10 +45,17 @@ export class PublicApi {
 
 export function getAst(dirPath: string, options: Options) {
     const ast = new Ast({ compilerOptions: { allowJs: true } });
+    ast.addExistingSourceFiles(path.join(dirPath, "**/*.{js,ts,jsx,tsx}"));
+
     if (options.quoteType === "'")
         ast.manipulationSettings.set({ quoteType: QuoteType.Single });
+    else if (options.quoteType === "\"")
+        ast.manipulationSettings.set({ quoteType: QuoteType.Double });
+    else
+        ast.manipulationSettings.set({ quoteType: determineQuoteType(ast) });
+
     if (options.newLineType === "\r\n")
         ast.manipulationSettings.set({ newLineKind: NewLineKind.CarriageReturnLineFeed });
-    ast.addExistingSourceFiles(path.join(dirPath, "**/*.{js,ts,jsx,tsx}"));
+
     return ast;
 }
