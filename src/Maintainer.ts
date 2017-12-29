@@ -136,5 +136,5 @@ function getModuleSpecifierForDir(dir: Directory) {
 }
 
 function getModuleSpecifierForFile(file: SourceFile) {
-    return `./${file.getBaseName().replace(/\.(ts|js)$/, "")}`;
+    return `./${file.getBaseName().replace(/\.(ts|js|tsx|jsx)$/, "")}`;
 }
