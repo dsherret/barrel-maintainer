@@ -189,6 +189,32 @@ describe("Maintainer", () => {
             });
         });
 
+        describe("adding a file", () => {
+            const {ast, maintainer, rootDir} = setup();
+            const file = rootDir.createSourceFile("dir/b.ts", "export class MyClass {}");
+            const subdir = file.getDirectory();
+
+            maintainer.updateDir(rootDir);
+            rootDir.createSourceFile("dir/c.ts", "export class MyClass2 {}");
+            rootDir.createSourceFile("dir/a.ts", "export class MyClass2 {}");
+            rootDir.createSourceFile("dir/f.ts", "export class MyClass2 {}");
+            rootDir.createSourceFile("dir/e.ts", "export class MyClass2 {}");
+            rootDir.createSourceFile("dir/d.ts", "export class MyClass2 {}");
+            maintainer.updateDir(subdir);
+
+            it("should have the correct files and put them in alphabetical order", () => {
+                checkBarrels(rootDir, [{
+                    path: "dir/index.ts",
+                    text: `export * from "./a";\n` +
+                        `export * from "./b";\n` +
+                        `export * from "./c";\n` +
+                        `export * from "./d";\n` +
+                        `export * from "./e";\n` +
+                        `export * from "./f";\n`
+                }]);
+            });
+        });
+
         describe("adding a folder", () => {
             const {ast, maintainer, rootDir} = setup();
             const file = rootDir.createSourceFile("dir/subdir/file.ts", "export class MyClass {}");
@@ -204,7 +230,7 @@ describe("Maintainer", () => {
                     text: `export * from "./subdir";\n`
                 }, {
                     path: "dir/subdir/index.ts",
-                    text: `export * from "./file";\nexport * from "./deeper";\n`
+                    text: `export * from "./deeper";\nexport * from "./file";\n`
                 }, {
                     path: "dir/subdir/deeper/index.ts",
                     text: `export * from "./file";\n`

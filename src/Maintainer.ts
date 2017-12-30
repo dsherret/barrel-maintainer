@@ -124,7 +124,21 @@ function isSourceFileForBarrel(sourceFile: SourceFile) {
 }
 
 function addNamespaceExports(barrelFile: SourceFile, moduleSpecifiers: string[]) {
-    barrelFile.addExportDeclarations(moduleSpecifiers.map(moduleSpecifier => ({ moduleSpecifier })));
+    for (const moduleSpecifier of moduleSpecifiers) {
+        barrelFile.insertExportDeclaration(getInsertIndex(moduleSpecifier), { moduleSpecifier });
+    }
+
+    function getInsertIndex(moduleSpecifier: string) {
+        const insertDec = barrelFile.getExportDeclaration(s => s.getModuleSpecifier()! > moduleSpecifier);
+        if (insertDec != null)
+            return insertDec.getChildIndex();
+
+        const exports = barrelFile.getExportDeclarations();
+        if (exports.length > 0)
+            return exports[exports.length - 1].getChildIndex() + 1;
+
+        return barrelFile.getStatements().length;
+    }
 }
 
 function getExportForDir(barrelFile: SourceFile, dir: Directory) {
