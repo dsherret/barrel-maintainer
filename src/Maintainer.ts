@@ -37,25 +37,29 @@ export class Maintainer {
         let barrelFile = dir.getSourceFile(this.barrelFileName);
         const dirsForBarrel = dir.getDirectories().filter(d => this.updateDirInternal(d));
         const filesForBarrel = dir.getSourceFiles().filter(s => s !== barrelFile && isSourceFileForBarrel(s));
+        const allExports = [...filesForBarrel.map(getModuleSpecifierForFile), ...dirsForBarrel.map(getModuleSpecifierForDir)];
+        const existingExports = barrelFile == null ? [] : getNamespaceExports(barrelFile);
+        const exportsToAdd = allExports.filter(e => existingExports.findIndex(i => i.getModuleSpecifier() === e) === -1);
+        const exportsToRemove = existingExports.filter(e => allExports.indexOf(e.getModuleSpecifier()!) === -1);
 
-        if (barrelFile != null)
-            removeNamespaceExports(barrelFile);
+        if (barrelFile == null && allExports.length > 0)
+            barrelFile = dir.createSourceFile(this.barrelFileName);
 
-        if (filesForBarrel.length > 0 || dirsForBarrel.length > 0) {
-            if (barrelFile == null)
-                barrelFile = dir.createSourceFile(this.barrelFileName);
+        if (barrelFile == null)
+            return false;
 
-            addNamespaceExports(barrelFile, [
-                ...filesForBarrel.map(getModuleSpecifierForFile),
-                ...dirsForBarrel.map(getModuleSpecifierForDir)
-            ]);
-        }
-        else if (barrelFile != null && barrelFile.getStatements().length === 0) {
+        if (exportsToAdd != null && exportsToAdd.length > 0)
+            addNamespaceExports(barrelFile, exportsToAdd);
+
+        for (const exportToRemove of exportsToRemove)
+            exportToRemove.remove();
+
+        if (barrelFile.getStatements().length === 0) {
             barrelFile.delete();
-            barrelFile = undefined;
+            return false;
         }
 
-        return barrelFile != null && isSourceFileForBarrel(barrelFile);
+        return isSourceFileForBarrel(barrelFile);
     }
 
     private addBarrelExportToParent(dir: Directory) {
@@ -119,16 +123,17 @@ function isSourceFileForBarrel(sourceFile: SourceFile) {
     }
 }
 
-function addNamespaceExports(sourceFile: SourceFile, moduleSpecifiers: string[]) {
-    sourceFile.addExportDeclarations(moduleSpecifiers.map(moduleSpecifier => ({ moduleSpecifier })));
-}
-
-function removeNamespaceExports(sourceFile: SourceFile) {
-    sourceFile.getExportDeclarations().filter(e => e.isNamespaceExport()).forEach(e => e.remove());
+function addNamespaceExports(barrelFile: SourceFile, moduleSpecifiers: string[]) {
+    barrelFile.addExportDeclarations(moduleSpecifiers.map(moduleSpecifier => ({ moduleSpecifier })));
 }
 
 function getExportForDir(barrelFile: SourceFile, dir: Directory) {
-    return barrelFile.getExportDeclaration(e => e.isNamespaceExport() && e.getModuleSpecifier() === getModuleSpecifierForDir(dir));
+    const dirModuleSpecifier = getModuleSpecifierForDir(dir);
+    return barrelFile.getExportDeclaration(e => e.isNamespaceExport() && e.getModuleSpecifier() === dirModuleSpecifier);
+}
+
+function getNamespaceExports(barrelFile: SourceFile) {
+    return barrelFile.getExportDeclarations().filter(e => e.isNamespaceExport() && e.hasModuleSpecifier());
 }
 
 function getModuleSpecifierForDir(dir: Directory) {
