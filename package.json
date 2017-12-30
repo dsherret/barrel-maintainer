@@ -1,7 +1,7 @@
 {
   "name": "barrel-maintainer",
   "version": "1.0.0",
-  "description": "Automatic real-time maintenance of barrels in ES2015.",
+  "description": "Automated real-time maintenance of barrels in ES2015.",
   "main": "dist/index.js",
   "bin": {
     "barrel-maintainer": "dist/cli.js"
@@ -41,5 +41,10 @@
     "mocha": "^4.0.1",
     "nyc": "^11.4.1",
     "tslint": "^5.8.0"
+  },
+  "nyc": {
+    "exclude": [
+      "dist/tests/**/*.js"
+    ]
   }
 }

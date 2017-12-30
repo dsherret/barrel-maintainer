@@ -60,3 +60,9 @@ const watcher = maintainer.watchDirectory("myProject/src");
 // then later (if necessary)
 watcher.stop();
 ```
+
+## Disclaimer
+
+This library will modify and delete source code. I am not responsible for any of its modifications or deletions!
+
+Always use version control to verify and to be able to easily revert the changes it makes!
