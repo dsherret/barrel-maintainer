@@ -238,6 +238,22 @@ describe("Maintainer", () => {
             });
         });
 
+        describe("having a named export in a barrel", () => {
+            const {ast, maintainer, rootDir} = setup();
+            rootDir.createSourceFile("dir/file1.ts", "export class MyClass {}");
+            rootDir.createSourceFile("dir/file2.ts", "export class MyClass2 {}");
+            rootDir.createSourceFile("dir/index.ts", `export {MyClass2} from "./file2";\n`);
+            maintainer.updateDir(rootDir);
+
+            it("should keep the named export as-is", () => {
+                checkBarrels(rootDir, [{
+                    path: "dir/index.ts",
+                    text: `export * from "./file1";\n` +
+                        `export {MyClass2} from "./file2";\n`
+                }]);
+            });
+        });
+
         describe("using single quotes and js files", () => {
             const {ast, maintainer, rootDir} = setup({ quoteStyle: "'", fileExtension: "js" });
             const file = rootDir.createSourceFile("dir/file.js", "export class MyClass {}");

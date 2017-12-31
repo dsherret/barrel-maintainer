@@ -42,6 +42,28 @@ export function log(message: string) {
 }
 ```
 
+## Exporting a Subset of a File's Exports
+
+Given the following setup:
+
+```js
+// classes.js
+export ClassA {}
+export ClassB {}
+
+// index.js
+export * from "./classes";
+```
+
+If you want the barrel to export a subset of the exports from *classes.js*, then edit the barrel to say so:
+
+```js
+// index.js
+export {ClassA} from "./classes";
+```
+
+These kind of changes won't be overwritten by the code manipulation.
+
 ## Api
 
 ```ts
