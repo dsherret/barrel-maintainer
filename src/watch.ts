@@ -6,7 +6,9 @@ import {Throttler, DirectoryAncestorCollection} from "./utils";
 
 export function watch(rootDir: Directory, directory: Directory, maintainer: Maintainer) {
     const watchThrottler = new WatchThrottler(100, maintainer, rootDir);
-    const watcher = chokidar.watch(path.join(directory.getPath(), "**/*.{ts,js,tsx,jsx}")).on("all", async (event: string, path: string) => {
+    const watcher = chokidar.watch(path.join(directory.getPath(), "**/*.{ts,js,tsx,jsx}"), {
+        ignorePermissionErrors: true
+    }).on("all", async (event: string, path: string) => {
         const sourceFile = directory.getSourceFile(path) || directory.addSourceFileIfExists(path);
         if (sourceFile == null)
             return;
