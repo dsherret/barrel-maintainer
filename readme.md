@@ -4,7 +4,7 @@
 
 Automatically maintains [barrels](https://angular.io/guide/glossary#barrel) in real-time.
 
-[![Automated real-time barrel maintenance](demo.gif)](https://youtu.be/gFi7kQnD69k)
+[![Automated real-time barrel maintenance](https://github.com/dsherret/barrel-maintainer/raw/master/demo.gif)](https://youtu.be/gFi7kQnD69k)
 
 [Video Overview](https://youtu.be/gFi7kQnD69k)
 
