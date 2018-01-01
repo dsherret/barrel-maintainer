@@ -130,7 +130,8 @@ function addNamespaceExports(barrelFile: SourceFile, moduleSpecifiers: string[])
     }
 
     function getInsertIndex(moduleSpecifier: string) {
-        const insertDec = barrelFile.getExportDeclaration(s => s.getModuleSpecifier()! > moduleSpecifier);
+        const upperCaseModuleSpecifier = moduleSpecifier.toUpperCase();
+        const insertDec = barrelFile.getExportDeclaration(s => s.getModuleSpecifier()!.toUpperCase() > upperCaseModuleSpecifier);
         if (insertDec != null)
             return insertDec.getChildIndex();
 

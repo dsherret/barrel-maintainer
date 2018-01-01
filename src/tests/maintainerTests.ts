@@ -198,7 +198,7 @@ describe("Maintainer", () => {
             rootDir.createSourceFile("dir/c.ts", "export class MyClass2 {}");
             rootDir.createSourceFile("dir/a.ts", "export class MyClass2 {}");
             rootDir.createSourceFile("dir/f.ts", "export class MyClass2 {}");
-            rootDir.createSourceFile("dir/e.ts", "export class MyClass2 {}");
+            rootDir.createSourceFile("dir/E.ts", "export class MyClass2 {}");
             rootDir.createSourceFile("dir/d.ts", "export class MyClass2 {}");
             maintainer.updateDir(subdir);
 
@@ -209,7 +209,7 @@ describe("Maintainer", () => {
                         `export * from "./b";\n` +
                         `export * from "./c";\n` +
                         `export * from "./d";\n` +
-                        `export * from "./e";\n` +
+                        `export * from "./E";\n` +
                         `export * from "./f";\n`
                 }]);
             });
