@@ -92,7 +92,7 @@ export class Maintainer {
             this.removeBarrelExportFromParent(parentBarrelFile.getDirectory());
 
         if (parentBarrelFile.getStatements().length === 0)
-            parentBarrelFile.delete();
+            parentBarrelFile.deleteSync();
     }
 
     private getParentDir(dir: Directory) {

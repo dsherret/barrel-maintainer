@@ -7,19 +7,29 @@ import {Throttler, DirectoryAncestorCollection} from "./utils";
 export function watch(rootDir: Directory, directory: Directory, maintainer: Maintainer) {
     const watchThrottler = new WatchThrottler(100, maintainer, rootDir);
     const watcher = chokidar.watch(path.join(directory.getPath(), "**/*.{ts,js,tsx,jsx}"), {
-        ignorePermissionErrors: true
+        ignorePermissionErrors: true,
+        usePolling: true,
+        interval: 300
     }).on("all", async (event: string, path: string) => {
-        const sourceFile = directory.getSourceFile(path) || directory.addSourceFileIfExists(path);
-        if (sourceFile == null)
-            return;
+        try {
+            let sourceFile = directory.getSourceFile(path);
+            if (sourceFile == null) {
+                sourceFile = directory.addSourceFileIfExists(path);
+                if (sourceFile != null)
+                    watchThrottler.addDirectory(sourceFile.getDirectory());
+                return;
+            }
 
-        const dirToUpdate = sourceFile.getDirectory();
-        const result = await sourceFile.refreshFromFileSystem();
-        switch (result) {
-            case FileSystemRefreshResult.Updated:
-            case FileSystemRefreshResult.Deleted:
-                watchThrottler.addDirectory(dirToUpdate);
-                break;
+            const dirToUpdate = sourceFile.getDirectory();
+            const result = await sourceFile.refreshFromFileSystem();
+            switch (result) {
+                case FileSystemRefreshResult.Updated:
+                case FileSystemRefreshResult.Deleted:
+                    watchThrottler.addDirectory(dirToUpdate);
+                    break;
+            }
+        } catch (err) {
+            console.error(err);
         }
     });
 

@@ -31,6 +31,13 @@ describe("DirectoryAncestorCollection", () => {
             testDirs(collection, [rootDir]);
         });
 
+        it("should not add if the same directory exists", () => {
+            const collection = new DirectoryAncestorCollection();
+            collection.tryAdd(rootDir);
+            collection.tryAdd(rootDir);
+            testDirs(collection, [rootDir]);
+        });
+
         it("should add if a descendant exists and remove the descendants", () => {
             const collection = new DirectoryAncestorCollection();
             collection.tryAdd(grandChild1);

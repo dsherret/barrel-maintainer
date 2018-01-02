@@ -15,7 +15,7 @@ export class DirectoryAncestorCollection {
     tryAdd(dir: Directory) {
         for (let i = this.directories.length - 1; i >= 0; i--) {
             const existingDir = this.directories[i];
-            if (dir.isDescendantOf(existingDir))
+            if (dir.isDescendantOf(existingDir) || dir === existingDir)
                 return;
             if (dir.isAncestorOf(existingDir))
                 this.directories.splice(i, 1);

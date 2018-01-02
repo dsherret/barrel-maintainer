@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {Throttler} from "./../../utils";
+import {Throttler, asyncTimeout} from "./../../utils";
 
 describe("Throttler", () => {
     describe("#run()", () => {
@@ -17,9 +17,3 @@ describe("Throttler", () => {
         });
     });
 });
-
-function asyncTimeout(timeout: number) {
-    return new Promise(resolve => {
-        setTimeout(() => resolve(), timeout);
-    });
-}
