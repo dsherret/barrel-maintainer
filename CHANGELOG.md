@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.8"></a>
+## [1.2.8](https://github.com/dsherret/barrel-maintainer/compare/v1.2.7...v1.2.8) (2018-01-02)
+
+
+### Bug Fixes
+
+* Renaming a directory should update the barrel. ([3b92103](https://github.com/dsherret/barrel-maintainer/commit/3b92103))
+
+
+
 <a name="1.2.7"></a>
 ## [1.2.7](https://github.com/dsherret/barrel-maintainer/compare/v1.2.6...v1.2.7) (2018-01-01)
 
