@@ -87,6 +87,10 @@ const watcher = maintainer.watchDirectory("myProject/src");
 watcher.stop();
 ```
 
+## About
+
+This project uses [ts-simple-ast](https://github.com/dsherret/ts-simple-ast) to navigate and manipulate source code.
+
 ## Disclaimer
 
 This library will modify and delete source code. I am not responsible for any of its modifications or deletions!
