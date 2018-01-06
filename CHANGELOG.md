@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.9"></a>
+## [1.2.9](https://github.com/dsherret/barrel-maintainer/compare/v1.2.8...v1.2.9) (2018-01-06)
+
+
+### Bug Fixes
+
+* Fix issue with files being overwritten (ts-simple-ast issue) ([8a6f644](https://github.com/dsherret/barrel-maintainer/commit/8a6f644))
+
+
+
 <a name="1.2.8"></a>
 ## [1.2.8](https://github.com/dsherret/barrel-maintainer/compare/v1.2.7...v1.2.8) (2018-01-02)
 
