@@ -6,7 +6,7 @@ import {Throttler, DirectoryAncestorCollection} from "./utils";
 
 export function watch(rootDir: Directory, directory: Directory, maintainer: Maintainer) {
     const watchThrottler = new WatchThrottler(100, maintainer, rootDir);
-    const watcher = chokidar.watch(path.join(directory.getPath(), "**/*.{ts,js,tsx,jsx}"), {
+    const watcher = chokidar.watch([path.join(directory.getPath(), "**/*.{ts,js,tsx,jsx}"), "!" + path.join(directory.getPath(), "**/*.d.ts")], {
         ignorePermissionErrors: true,
         usePolling: true,
         interval: 300
