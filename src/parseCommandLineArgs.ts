@@ -4,7 +4,7 @@ import {CommandLineOptions} from "./CommandLineOptions";
 import * as minimist from "minimist";
 
 export function parseCommandLineArgs(args: string[]): CommandLineOptions {
-    const argv = minimist(args);
+    const argv = minimist(args, { boolean: true });
 
     return {
         path: getPath(),

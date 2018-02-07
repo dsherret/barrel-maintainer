@@ -45,9 +45,9 @@ export class PublicApi {
 
 export function getAst(dirPath: string, options: Options) {
     const ast = new Ast({ compilerOptions: { allowJs: true } });
-    ast.addExistingSourceFiles(
+    ast.addExistingSourceFiles([
         path.join(dirPath, "**/*.{js,ts,jsx,tsx}"),
-        "!" + path.join(dirPath, "**/*.d.ts"));
+        "!" + path.join(dirPath, "**/*.d.ts")]);
 
     if (options.quoteType === "'")
         ast.manipulationSettings.set({ quoteType: QuoteType.Single });

@@ -32,6 +32,14 @@ describe("parseCommandLineArgs", () => {
         doTest("src", { path: "src" });
     });
 
+    it("should return the path when including flags after", () => {
+        doTest("src --ts", { path: "src", fileExtension: "ts" });
+    });
+
+    it("should return the path when including flags before", () => {
+        doTest("--ts src", { path: "src", fileExtension: "ts" });
+    });
+
     describe("fileExtension", () => {
         it("should use ts when specifying", () => {
             doTest("--ts", { fileExtension: "ts" });
