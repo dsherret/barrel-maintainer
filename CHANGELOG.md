@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.11"></a>
+## [1.2.11](https://github.com/dsherret/barrel-maintainer/compare/v1.2.10...v1.2.11) (2018-02-07)
+
+
+### Bug Fixes
+
+* [#3](https://github.com/dsherret/barrel-maintainer/issues/3) - Fix flags coming before the path not working. ([2247b67](https://github.com/dsherret/barrel-maintainer/commit/2247b67))
+
+
+
 <a name="1.2.10"></a>
 ## [1.2.10](https://github.com/dsherret/barrel-maintainer/compare/v1.2.9...v1.2.10) (2018-01-07)
 
