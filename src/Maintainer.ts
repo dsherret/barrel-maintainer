@@ -1,4 +1,3 @@
-import * as ts from "typescript";
 import Ast, {SourceFile, Directory, TypeGuards} from "ts-simple-ast";
 import {determineFileExtension} from "./utils";
 
