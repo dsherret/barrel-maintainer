@@ -39,8 +39,8 @@ export class Maintainer {
         const allExports = [...filesForBarrel.map(getModuleSpecifierForFile), ...dirsForBarrel.map(getModuleSpecifierForDir)];
         const existingExports = barrelFile == null ? [] : barrelFile.getExportDeclarations().filter(e => e.hasModuleSpecifier());
         const existingNamespaceExports = existingExports.filter(e => e.isNamespaceExport());
-        const exportsToAdd = allExports.filter(e => existingExports.findIndex(i => i.getModuleSpecifier() === e) === -1);
-        const exportsToRemove = existingNamespaceExports.filter(e => allExports.indexOf(e.getModuleSpecifier()!) === -1);
+        const exportsToAdd = allExports.filter(e => existingExports.findIndex(i => i.getModuleSpecifierValue() === e) === -1);
+        const exportsToRemove = existingNamespaceExports.filter(e => allExports.indexOf(e.getModuleSpecifierValue()!) === -1);
 
         if (barrelFile == null && allExports.length > 0)
             barrelFile = dir.createSourceFile(this.barrelFileName);
@@ -91,7 +91,7 @@ export class Maintainer {
             this.removeBarrelExportFromParent(parentBarrelFile.getDirectory());
 
         if (parentBarrelFile.getStatements().length === 0)
-            parentBarrelFile.deleteSync();
+            parentBarrelFile.deleteImmediatelySync();
     }
 
     private getParentDir(dir: Directory) {
@@ -130,7 +130,7 @@ function addNamespaceExports(barrelFile: SourceFile, moduleSpecifiers: string[])
 
     function getInsertIndex(moduleSpecifier: string) {
         const upperCaseModuleSpecifier = moduleSpecifier.toUpperCase();
-        const insertDec = barrelFile.getExportDeclaration(s => s.getModuleSpecifier()!.toUpperCase() > upperCaseModuleSpecifier);
+        const insertDec = barrelFile.getExportDeclaration(s => s.getModuleSpecifierValue()!.toUpperCase() > upperCaseModuleSpecifier);
         if (insertDec != null)
             return insertDec.getChildIndex();
 
@@ -144,7 +144,7 @@ function addNamespaceExports(barrelFile: SourceFile, moduleSpecifiers: string[])
 
 function getExportForDir(barrelFile: SourceFile, dir: Directory) {
     const dirModuleSpecifier = getModuleSpecifierForDir(dir);
-    return barrelFile.getExportDeclaration(e => e.isNamespaceExport() && e.getModuleSpecifier() === dirModuleSpecifier);
+    return barrelFile.getExportDeclaration(e => e.isNamespaceExport() && e.getModuleSpecifierValue() === dirModuleSpecifier);
 }
 
 function getModuleSpecifierForDir(dir: Directory) {

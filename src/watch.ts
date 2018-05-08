@@ -14,7 +14,7 @@ export function watch(rootDir: Directory, directory: Directory, maintainer: Main
         try {
             let sourceFile = directory.getSourceFile(path);
             if (sourceFile == null) {
-                sourceFile = directory.addSourceFileIfExists(path);
+                sourceFile = directory.addExistingSourceFileIfExists(path);
                 if (sourceFile != null)
                     watchThrottler.addDirectory(sourceFile.getDirectory());
                 return;
@@ -51,7 +51,7 @@ class WatchThrottler {
                 console.log(`Updated ${directory.getPath()}`);
             }
             this.directories.clear();
-            this.rootDir.saveUnsavedSourceFiles();
+            this.rootDir.save();
         });
     }
 

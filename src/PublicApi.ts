@@ -1,10 +1,10 @@
-import Ast, {QuoteType, NewLineKind} from "ts-simple-ast";
+import Ast, { QuoteKind, NewLineKind } from "ts-simple-ast";
 import * as path from "path";
 import * as pathUtils from "./utils/pathUtils";
-import {Maintainer} from "./Maintainer";
-import {Options} from "./Options";
-import {watch} from "./watch";
-import {determineQuoteType} from "./utils";
+import { Maintainer } from "./Maintainer";
+import { Options } from "./Options";
+import { watch } from "./watch";
+import { determineQuoteKind } from "./utils";
 
 export class PublicApi {
     private readonly rootDirPath: string;
@@ -16,7 +16,7 @@ export class PublicApi {
     async updateDirectory(dirPath: string) {
         const {rootDir, dir, maintainer} = this.setup(dirPath);
         maintainer.updateDir(dir);
-        await rootDir.saveUnsavedSourceFiles();
+        await rootDir.save();
     }
 
     watchDirectory(dirPath: string) {
@@ -50,11 +50,11 @@ export function getAst(dirPath: string, options: Options) {
         "!" + path.join(dirPath, "**/*.d.ts")]);
 
     if (options.quoteType === "'")
-        ast.manipulationSettings.set({ quoteType: QuoteType.Single });
+        ast.manipulationSettings.set({ quoteKind: QuoteKind.Single });
     else if (options.quoteType === "\"")
-        ast.manipulationSettings.set({ quoteType: QuoteType.Double });
+        ast.manipulationSettings.set({ quoteKind: QuoteKind.Double });
     else
-        ast.manipulationSettings.set({ quoteType: determineQuoteType(ast) });
+        ast.manipulationSettings.set({ quoteKind: determineQuoteKind(ast) });
 
     if (options.newLineType === "\r\n")
         ast.manipulationSettings.set({ newLineKind: NewLineKind.CarriageReturnLineFeed });

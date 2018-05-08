@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import Ast, {Directory, QuoteType} from "ts-simple-ast";
+import Ast, {Directory, QuoteKind} from "ts-simple-ast";
 import {Maintainer} from "./../Maintainer";
 
 describe("Maintainer", () => {
@@ -7,7 +7,7 @@ describe("Maintainer", () => {
         const {fileExtension = "ts", quoteStyle, includeRootDir} = opts;
         const ast = new Ast({ useVirtualFileSystem: true });
         if (quoteStyle === "'")
-            ast.manipulationSettings.set({ quoteType: QuoteType.Single });
+            ast.manipulationSettings.set({ quoteKind: QuoteKind.Single });
         const rootDir = ast.createDirectory("rootDir");
         const maintainer = new Maintainer(rootDir, { fileExtension, includeRootDir });
         return {ast, rootDir, maintainer};
@@ -123,7 +123,7 @@ describe("Maintainer", () => {
             maintainer.updateDir(rootDir);
 
             const subDir = rootDir.getDirectoryOrThrow("random/subDir");
-            subDir.getSourceFileOrThrow("jsFile.js").deleteSync();
+            subDir.getSourceFileOrThrow("jsFile.js").deleteImmediatelySync();
             const indexPath = subDir.getSourceFileOrThrow("index.ts").getFilePath();
             maintainer.updateDir(subDir);
 
