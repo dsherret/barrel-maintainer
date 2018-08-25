@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/barrel-maintainer.svg)](https://badge.fury.io/js/barrel-maintainer)
 
-Automatically maintains [barrels](https://angular.io/guide/glossary#barrel) in real-time.
+Automatically maintains [barrels](https://basarat.gitbooks.io/typescript/docs/tips/barrel.html) in real-time.
 
 [![Automated real-time barrel maintenance](https://github.com/dsherret/barrel-maintainer/raw/master/demo.gif)](https://youtu.be/gFi7kQnD69k)
 
