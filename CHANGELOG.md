@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.3.1"></a>
+## [1.3.1](https://github.com/dsherret/barrel-maintainer/compare/v1.3.0...v1.3.1) (2018-08-25)
+
+
+### Bug Fixes
+
+* Point barrel link to TypeScript Deep Dive ([#4](https://github.com/dsherret/barrel-maintainer/issues/4)) ([819de99](https://github.com/dsherret/barrel-maintainer/commit/819de99))
+
+
+
 <a name="1.3.0"></a>
 # [1.3.0](https://github.com/dsherret/barrel-maintainer/compare/v1.2.11...v1.3.0) (2018-08-25)
 
