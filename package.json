@@ -9,7 +9,8 @@
   "scripts": {
     "build": "tsc",
     "lint": "tslint src/**/*.ts",
-    "test": "rimraf dist && npm run build && nyc --reporter=html --reporter=text mocha dist/tests/**/*.js && npm run lint"
+    "test": "rimraf dist && npm run build && nyc --reporter=html --reporter=text mocha dist/tests/**/*.js && npm run lint",
+    "dopublish": "npm run build && npm publish"
   },
   "repository": {
     "type": "git",
