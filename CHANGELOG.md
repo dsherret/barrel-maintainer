@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/dsherret/barrel-maintainer/compare/v1.2.11...v1.3.0) (2018-08-25)
+
+
+### Features
+
+* Add TypeScript 3.0 support. ([e0a4cb5](https://github.com/dsherret/barrel-maintainer/commit/e0a4cb5))
+
+
+
 <a name="1.2.11"></a>
 ## [1.2.11](https://github.com/dsherret/barrel-maintainer/compare/v1.2.10...v1.2.11) (2018-02-07)
 
