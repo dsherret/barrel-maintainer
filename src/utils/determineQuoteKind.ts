@@ -1,13 +1,13 @@
 import * as ts from "typescript";
-import Ast, { QuoteKind } from "ts-simple-ast";
+import Project, { QuoteKind } from "ts-simple-ast";
 
 /**
  * Finds a source file with an import declaration, then checks what quote kind it's using.
  * @param ast - Ast.
  */
-export function determineQuoteKind(ast: Ast) {
+export function determineQuoteKind(project: Project) {
     const defaultType = QuoteKind.Double;
-    const sourceFileWithImport = ast.getSourceFiles().find(s => s.getImportDeclarations().length > 0);
+    const sourceFileWithImport = project.getSourceFiles().find(s => s.getImportDeclarations().length > 0);
     if (sourceFileWithImport == null)
         return defaultType;
     const importDeclaration = sourceFileWithImport.getImportDeclarations()[0];

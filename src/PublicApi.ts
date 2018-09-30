@@ -1,4 +1,4 @@
-import Ast, { QuoteKind, NewLineKind } from "ts-simple-ast";
+import Project, { QuoteKind, NewLineKind } from "ts-simple-ast";
 import * as path from "path";
 import * as pathUtils from "./utils/pathUtils";
 import { Maintainer } from "./Maintainer";
@@ -14,25 +14,25 @@ export class PublicApi {
     }
 
     async updateDirectory(dirPath: string) {
-        const {rootDir, dir, maintainer} = this.setup(dirPath);
+        const { rootDir, dir, maintainer } = this.setup(dirPath);
         maintainer.updateDir(dir);
         await rootDir.save();
     }
 
     watchDirectory(dirPath: string) {
-        const {rootDir, dir, maintainer} = this.setup(dirPath);
+        const { rootDir, dir, maintainer } = this.setup(dirPath);
         return watch(rootDir, dir, maintainer);
     }
 
     private setup(dirPath: string) {
         dirPath = this.verifyAndGetPath(dirPath);
 
-        const ast = getAst(this.rootDirPath, this.options);
-        const dir = ast.addExistingDirectory(dirPath);
-        const rootDir = ast.getRootDirectories()[0];
+        const project = getProject(this.rootDirPath, this.options);
+        const dir = project.addExistingDirectory(dirPath);
+        const rootDir = project.getRootDirectories()[0];
         const maintainer = new Maintainer(rootDir, this.options);
 
-        return {ast, dir, rootDir, maintainer};
+        return { project, dir, rootDir, maintainer };
     }
 
     private verifyAndGetPath(dirPath: string) {
@@ -43,21 +43,21 @@ export class PublicApi {
     }
 }
 
-export function getAst(dirPath: string, options: Options) {
-    const ast = new Ast({ compilerOptions: { allowJs: true } });
-    ast.addExistingSourceFiles([
+export function getProject(dirPath: string, options: Options) {
+    const project = new Project({ compilerOptions: { allowJs: true } });
+    project.addExistingSourceFiles([
         path.join(dirPath, "**/*.{js,ts,jsx,tsx}"),
         "!" + path.join(dirPath, "**/*.d.ts")]);
 
     if (options.quoteType === "'")
-        ast.manipulationSettings.set({ quoteKind: QuoteKind.Single });
+        project.manipulationSettings.set({ quoteKind: QuoteKind.Single });
     else if (options.quoteType === "\"")
-        ast.manipulationSettings.set({ quoteKind: QuoteKind.Double });
+        project.manipulationSettings.set({ quoteKind: QuoteKind.Double });
     else
-        ast.manipulationSettings.set({ quoteKind: determineQuoteKind(ast) });
+        project.manipulationSettings.set({ quoteKind: determineQuoteKind(project) });
 
     if (options.newLineType === "\r\n")
-        ast.manipulationSettings.set({ newLineKind: NewLineKind.CarriageReturnLineFeed });
+        project.manipulationSettings.set({ newLineKind: NewLineKind.CarriageReturnLineFeed });
 
-    return ast;
+    return project;
 }
