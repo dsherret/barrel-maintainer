@@ -1,4 +1,4 @@
-import {Options} from "./Options";
+import { Options } from "./Options";
 
 export interface CommandLineOptions extends Options {
     path: string;

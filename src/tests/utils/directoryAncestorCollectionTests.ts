@@ -1,10 +1,10 @@
-import {expect} from "chai";
-import Ast, {Directory} from "ts-simple-ast";
-import {DirectoryAncestorCollection} from "./../../utils";
+import { expect } from "chai";
+import Project, { Directory } from "ts-simple-ast";
+import { DirectoryAncestorCollection } from "./../../utils";
 
 describe("DirectoryAncestorCollection", () => {
-    const ast = new Ast({ useVirtualFileSystem: true });
-    const rootDir = ast.createDirectory("dir");
+    const project = new Project({ useVirtualFileSystem: true });
+    const rootDir = project.createDirectory("dir");
     const child1 = rootDir.createDirectory("child1");
     const child2 = rootDir.createDirectory("child2");
     const grandChild1 = child1.createDirectory("grandChild1");

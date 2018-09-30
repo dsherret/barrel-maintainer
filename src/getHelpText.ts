@@ -1,4 +1,4 @@
-import {getPackageVersion} from "./getPackageVersion";
+import { getPackageVersion } from "./getPackageVersion";
 
 export function getHelpText() {
     // I used tsc --help as an example template for this

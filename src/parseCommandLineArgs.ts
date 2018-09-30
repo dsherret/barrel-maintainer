@@ -1,6 +1,6 @@
 import * as path from "path";
 import * as os from "os";
-import {CommandLineOptions} from "./CommandLineOptions";
+import { CommandLineOptions } from "./CommandLineOptions";
 import * as minimist from "minimist";
 
 export function parseCommandLineArgs(args: string[]): CommandLineOptions {

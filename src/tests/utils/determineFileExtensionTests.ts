@@ -1,21 +1,21 @@
-import {expect} from "chai";
-import Ast from "ts-simple-ast";
-import {determineFileExtension} from "./../../utils";
+import { expect } from "chai";
+import Project from "ts-simple-ast";
+import { determineFileExtension } from "./../../utils";
 
 describe("determineFileExtension", () => {
     function setup() {
-        const ast = new Ast({ useVirtualFileSystem: true });
-        const rootDir = ast.createDirectory("rootDir");
-        return {ast, rootDir};
+        const project = new Project({ useVirtualFileSystem: true });
+        const rootDir = project.createDirectory("rootDir");
+        return {project, rootDir};
     }
 
     it("should determine as js when there are no files", () => {
-        const {ast, rootDir} = setup();
+        const { rootDir } = setup();
         expect(determineFileExtension(rootDir)).to.equal("js");
     });
 
     it("should determine as js when there are more js files", () => {
-        const {ast, rootDir} = setup();
+        const { rootDir } = setup();
         rootDir.createSourceFile("file.ts");
         rootDir.createSourceFile("dir/file.js");
         rootDir.createSourceFile("dir/file2.js");
@@ -23,7 +23,7 @@ describe("determineFileExtension", () => {
     });
 
     it("should determine as ts when there are more ts files", () => {
-        const {ast, rootDir} = setup();
+        const { rootDir } = setup();
         rootDir.createSourceFile("file.ts");
         rootDir.createSourceFile("dir/file.ts");
         rootDir.createSourceFile("dir/file2.js");

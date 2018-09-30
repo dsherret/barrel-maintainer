@@ -1,5 +1,5 @@
-import {expect} from "chai";
-import {Throttler, asyncTimeout} from "./../../utils";
+import { expect } from "chai";
+import { Throttler, asyncTimeout } from "./../../utils";
 
 describe("Throttler", () => {
     describe("#run()", () => {

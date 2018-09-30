@@ -1,2 +1,2 @@
-export {PublicApi as default} from "./PublicApi";
-export {Options} from "./Options";
+export { PublicApi as default } from "./PublicApi";
+export { Options } from "./Options";

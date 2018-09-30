@@ -1,16 +1,16 @@
-import {expect} from "chai";
-import Ast, {Directory, QuoteKind} from "ts-simple-ast";
-import {Maintainer} from "./../Maintainer";
+import { expect } from "chai";
+import Project, { Directory, QuoteKind } from "ts-simple-ast";
+import { Maintainer } from "./../Maintainer";
 
 describe("Maintainer", () => {
     function setup(opts: { fileExtension?: "ts" | "js"; quoteStyle?: "\"" | "'"; includeRootDir?: boolean; } = {}) {
         const {fileExtension = "ts", quoteStyle, includeRootDir} = opts;
-        const ast = new Ast({ useVirtualFileSystem: true });
+        const project = new Project({ useVirtualFileSystem: true });
         if (quoteStyle === "'")
-            ast.manipulationSettings.set({ quoteKind: QuoteKind.Single });
-        const rootDir = ast.createDirectory("rootDir");
+            project.manipulationSettings.set({ quoteKind: QuoteKind.Single });
+        const rootDir = project.createDirectory("rootDir");
         const maintainer = new Maintainer(rootDir, { fileExtension, includeRootDir });
-        return {ast, rootDir, maintainer};
+        return {project, rootDir, maintainer};
     }
 
     function checkBarrels(dir: Directory, expectedBarrelFiles: { path: string; text: string; }[]) {
@@ -29,8 +29,8 @@ describe("Maintainer", () => {
 
     describe("#updateDir()", () => {
         it("should determine the file extension", () => {
-            const ast = new Ast({ useVirtualFileSystem: true });
-            const rootDir = ast.createDirectory("dir");
+            const project = new Project({ useVirtualFileSystem: true });
+            const rootDir = project.createDirectory("dir");
             rootDir.createSourceFile("dir/file.ts", "");
             const maintainer = new Maintainer(rootDir, {});
             maintainer.updateDir(rootDir);
@@ -43,14 +43,14 @@ describe("Maintainer", () => {
         });
 
         it("should throw if specifying a directory that is not a descendant or equal to the root directory", () => {
-            const {ast, maintainer, rootDir} = setup();
-            const otherDir = ast.createDirectory("otherDir");
+            const { project, maintainer } = setup();
+            const otherDir = project.createDirectory("otherDir");
             expect(() => maintainer.updateDir(otherDir)).to.throw();
         });
 
         it("should update the root directory when specifying so", () => {
-            const {ast, maintainer, rootDir} = setup({ includeRootDir: true });
-            const dir = ast.createDirectory("dir");
+            const { project, rootDir } = setup({ includeRootDir: true });
+            const dir = project.createDirectory("dir");
             dir.createSourceFile("dir/file.ts", "");
 
             it("should have the correct files", () => {
@@ -62,7 +62,7 @@ describe("Maintainer", () => {
         });
 
         describe("specifying the root directory", () => {
-            const {ast, rootDir, maintainer} = setup();
+            const { rootDir, maintainer } = setup();
 
             // entities dir
             const entitiesDir = rootDir.createDirectory("entities");
@@ -95,7 +95,7 @@ describe("Maintainer", () => {
         });
 
         describe("only updating one directory", () => {
-            const {ast, rootDir, maintainer} = setup();
+            const { rootDir, maintainer } = setup();
 
             const entitiesDir = rootDir.createDirectory("entities");
             entitiesDir.createSourceFile("person.ts", "export class Person {}");
@@ -114,7 +114,7 @@ describe("Maintainer", () => {
         });
 
         describe("deleting all the files in a folder after updating", () => {
-            const {ast, rootDir, maintainer} = setup();
+            const { project, rootDir, maintainer } = setup();
             const randomDir = rootDir.createDirectory("random");
             randomDir.createSourceFile("file1.ts", "export = 5;");
             const randomSubDir = randomDir.createDirectory("subDir");
@@ -128,7 +128,7 @@ describe("Maintainer", () => {
             maintainer.updateDir(subDir);
 
             it("should have deleted the index file in the sub directory", () => {
-                expect(ast.getFileSystem().fileExistsSync(indexPath)).to.be.false;
+                expect(project.getFileSystem().fileExistsSync(indexPath)).to.be.false;
                 expect(subDir.getSourceFile("index.ts")).to.be.undefined;
             });
 
@@ -140,7 +140,7 @@ describe("Maintainer", () => {
         });
 
         describe("deleting a file way down in a sub folder", () => {
-            const {ast, maintainer, rootDir} = setup();
+            const { maintainer, rootDir } = setup();
             const descendantFile = rootDir.createSourceFile("dir/subdir/deeper/more/file.ts", "export class MyClass {}");
             const finalDirectory = descendantFile.getDirectory();
 
@@ -160,7 +160,7 @@ describe("Maintainer", () => {
         });
 
         describe("deleting a file way down in a sub folder", () => {
-            const {ast, maintainer, rootDir} = setup();
+            const { maintainer, rootDir } = setup();
             const descendantFile = rootDir.createSourceFile("dir/subdir/deeper/more/file.ts", "export class MyClass {}");
             const finalDirectory = descendantFile.getDirectory();
 
@@ -174,7 +174,7 @@ describe("Maintainer", () => {
         });
 
         describe("refreshing a folder multiple times", () => {
-            const {ast, maintainer, rootDir} = setup();
+            const { maintainer, rootDir } = setup();
             const file = rootDir.createSourceFile("dir/file.ts", "export class MyClass {}");
             const dir = file.getDirectory();
 
@@ -190,7 +190,7 @@ describe("Maintainer", () => {
         });
 
         describe("adding a file", () => {
-            const {ast, maintainer, rootDir} = setup();
+            const { maintainer, rootDir } = setup();
             const file = rootDir.createSourceFile("dir/b.ts", "export class MyClass {}");
             const subdir = file.getDirectory();
 
@@ -216,7 +216,7 @@ describe("Maintainer", () => {
         });
 
         describe("adding a folder", () => {
-            const {ast, maintainer, rootDir} = setup();
+            const { maintainer, rootDir } = setup();
             const file = rootDir.createSourceFile("dir/subdir/file.ts", "export class MyClass {}");
             const subdir = file.getDirectory();
 
@@ -239,7 +239,7 @@ describe("Maintainer", () => {
         });
 
         describe("having a named export in a barrel", () => {
-            const {ast, maintainer, rootDir} = setup();
+            const { maintainer, rootDir } = setup();
             rootDir.createSourceFile("dir/file1.ts", "export class MyClass {}");
             rootDir.createSourceFile("dir/file2.ts", "export class MyClass2 {}");
             rootDir.createSourceFile("dir/index.ts", `export {MyClass2} from "./file2";\n`);
@@ -255,8 +255,8 @@ describe("Maintainer", () => {
         });
 
         describe("using single quotes and js files", () => {
-            const {ast, maintainer, rootDir} = setup({ quoteStyle: "'", fileExtension: "js" });
-            const file = rootDir.createSourceFile("dir/file.js", "export class MyClass {}");
+            const { maintainer, rootDir } = setup({ quoteStyle: "'", fileExtension: "js" });
+            rootDir.createSourceFile("dir/file.js", "export class MyClass {}");
             maintainer.updateDir(rootDir);
 
             it("should have the correct files", () => {

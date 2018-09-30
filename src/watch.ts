@@ -1,8 +1,8 @@
 import * as chokidar from "chokidar";
 import * as path from "path";
-import {FileSystemRefreshResult, Directory} from "ts-simple-ast";
-import {Maintainer} from "./Maintainer";
-import {Throttler, DirectoryAncestorCollection} from "./utils";
+import { FileSystemRefreshResult, Directory } from "ts-simple-ast";
+import { Maintainer } from "./Maintainer";
+import { Throttler, DirectoryAncestorCollection } from "./utils";
 
 export function watch(rootDir: Directory, directory: Directory, maintainer: Maintainer) {
     const watchThrottler = new WatchThrottler(100, maintainer, rootDir);

@@ -1,5 +1,4 @@
-import * as ts from "typescript";
-import Project, { QuoteKind } from "ts-simple-ast";
+import Project, { QuoteKind, SyntaxKind } from "ts-simple-ast";
 
 /**
  * Finds a source file with an import declaration, then checks what quote kind it's using.
@@ -11,7 +10,7 @@ export function determineQuoteKind(project: Project) {
     if (sourceFileWithImport == null)
         return defaultType;
     const importDeclaration = sourceFileWithImport.getImportDeclarations()[0];
-    const stringLiteral = importDeclaration.getFirstChildByKind(ts.SyntaxKind.StringLiteral);
+    const stringLiteral = importDeclaration.getFirstChildByKind(SyntaxKind.StringLiteral);
 
     return stringLiteral == null ? defaultType : stringLiteral.getQuoteKind();
 }

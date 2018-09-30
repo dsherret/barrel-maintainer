@@ -1,8 +1,8 @@
-import {expect} from "chai";
+import { expect } from "chai";
 import * as path from "path";
 import * as os from "os";
-import {CommandLineOptions} from "./../CommandLineOptions";
-import {parseCommandLineArgs} from "./../parseCommandLineArgs";
+import { CommandLineOptions } from "./../CommandLineOptions";
+import { parseCommandLineArgs } from "./../parseCommandLineArgs";
 
 describe("parseCommandLineArgs", () => {
     function doThrowTest(args: string) {

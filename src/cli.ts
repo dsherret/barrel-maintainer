@@ -1,11 +1,9 @@
 #!/usr/bin/env node
 
-import * as path from "path";
-import * as os from "os";
-import {PublicApi} from "./PublicApi";
-import {parseCommandLineArgs} from "./parseCommandLineArgs";
-import {getPackageVersion} from "./getPackageVersion";
-import {getHelpText} from "./getHelpText";
+import { PublicApi } from "./PublicApi";
+import { parseCommandLineArgs } from "./parseCommandLineArgs";
+import { getPackageVersion } from "./getPackageVersion";
+import { getHelpText } from "./getHelpText";
 
 const args = parseCommandLineArgs(process.argv.slice(2));
 if (args.showHelp)
