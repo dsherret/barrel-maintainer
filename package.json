@@ -30,7 +30,7 @@
     "@types/minimist": "^1.2.0",
     "chokidar": "^1.7.0",
     "minimist": "^1.2.0",
-    "ts-simple-ast": "16.0.0"
+    "ts-simple-ast": "17.0.0"
   },
   "devDependencies": {
     "@types/chai": "^4.0.10",
