@@ -1,4 +1,4 @@
-import { SourceFile, Directory, TypeGuards } from "ts-simple-ast";
+import { SourceFile, Directory, TypeGuards } from "ts-morph";
 import { determineFileExtension } from "./utils";
 
 export interface MaintainerOptions {

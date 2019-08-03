@@ -89,7 +89,7 @@ watcher.stop();
 
 ## About
 
-This project uses [ts-simple-ast](https://github.com/dsherret/ts-simple-ast) to navigate and manipulate source code.
+This project uses [ts-morph](https://github.com/dsherret/ts-morph) to navigate and manipulate source code.
 
 ## Disclaimer
 

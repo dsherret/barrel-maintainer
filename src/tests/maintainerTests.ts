@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import Project, { Directory, QuoteKind } from "ts-simple-ast";
+import { Project, Directory, QuoteKind } from "ts-morph";
 import { Maintainer } from "./../Maintainer";
 
 describe("Maintainer", () => {

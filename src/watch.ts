@@ -1,6 +1,6 @@
 import * as chokidar from "chokidar";
 import * as path from "path";
-import { FileSystemRefreshResult, Directory } from "ts-simple-ast";
+import { FileSystemRefreshResult, Directory } from "ts-morph";
 import { Maintainer } from "./Maintainer";
 import { Throttler, DirectoryAncestorCollection } from "./utils";
 

@@ -1,4 +1,4 @@
-import Project, { QuoteKind, SyntaxKind } from "ts-simple-ast";
+import { Project, QuoteKind, SyntaxKind } from "ts-morph";
 
 /**
  * Finds a source file with an import declaration, then checks what quote kind it's using.

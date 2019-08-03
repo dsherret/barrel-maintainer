@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import Project, { Directory } from "ts-simple-ast";
+import { Project, Directory } from "ts-morph";
 import { DirectoryAncestorCollection } from "./../../utils";
 
 describe("DirectoryAncestorCollection", () => {

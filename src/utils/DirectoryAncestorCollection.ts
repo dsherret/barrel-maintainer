@@ -1,4 +1,4 @@
-import { Directory } from "ts-simple-ast";
+import { Directory } from "ts-morph";
 
 /**
  * Holds a collection of directories, but only maintains the parent-most directories.

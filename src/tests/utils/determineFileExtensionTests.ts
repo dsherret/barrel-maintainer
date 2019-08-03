@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import Project from "ts-simple-ast";
+import { Project } from "ts-morph";
 import { determineFileExtension } from "./../../utils";
 
 describe("determineFileExtension", () => {

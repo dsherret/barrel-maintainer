@@ -1,4 +1,4 @@
-import { Directory } from "ts-simple-ast";
+import { Directory } from "ts-morph";
 
 export function determineFileExtension(dir: Directory) {
     const extensions = dir.getDescendantSourceFiles().map(s => {

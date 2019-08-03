@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import Project, { QuoteKind } from "ts-simple-ast";
+import { Project, QuoteKind } from "ts-morph";
 import { determineQuoteKind } from "./../../utils";
 
 describe("determineQuoteKind", () => {

@@ -1,4 +1,4 @@
-import Project, { QuoteKind, NewLineKind } from "ts-simple-ast";
+import { Project, QuoteKind, NewLineKind } from "ts-morph";
 import * as path from "path";
 import * as pathUtils from "./utils/pathUtils";
 import { Maintainer } from "./Maintainer";
