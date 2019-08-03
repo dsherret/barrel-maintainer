@@ -124,9 +124,8 @@ function isSourceFileForBarrel(sourceFile: SourceFile) {
 }
 
 function addNamespaceExports(barrelFile: SourceFile, moduleSpecifiers: string[]) {
-    for (const moduleSpecifier of moduleSpecifiers) {
+    for (const moduleSpecifier of moduleSpecifiers)
         barrelFile.insertExportDeclaration(getInsertIndex(moduleSpecifier), { moduleSpecifier });
-    }
 
     function getInsertIndex(moduleSpecifier: string) {
         const upperCaseModuleSpecifier = moduleSpecifier.toUpperCase();

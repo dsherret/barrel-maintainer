@@ -14,3 +14,5 @@
 *.csproj.user
 *.sln
 demo.gif
+dprint.json
+tsconfig.json

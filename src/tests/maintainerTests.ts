@@ -4,13 +4,13 @@ import { Maintainer } from "./../Maintainer";
 
 describe("Maintainer", () => {
     function setup(opts: { fileExtension?: "ts" | "js"; quoteStyle?: "\"" | "'"; includeRootDir?: boolean; } = {}) {
-        const {fileExtension = "ts", quoteStyle, includeRootDir} = opts;
+        const { fileExtension = "ts", quoteStyle, includeRootDir } = opts;
         const project = new Project({ useVirtualFileSystem: true });
         if (quoteStyle === "'")
             project.manipulationSettings.set({ quoteKind: QuoteKind.Single });
         const rootDir = project.createDirectory("rootDir");
         const maintainer = new Maintainer(rootDir, { fileExtension, includeRootDir });
-        return {project, rootDir, maintainer};
+        return { project, rootDir, maintainer };
     }
 
     function checkBarrels(dir: Directory, expectedBarrelFiles: { path: string; text: string; }[]) {
@@ -37,7 +37,7 @@ describe("Maintainer", () => {
 
             it("should have the correct files", () => {
                 checkBarrels(rootDir, [
-                    { path: "dir/index.ts", text: `export * from "./file";\n` },
+                    { path: "dir/index.ts", text: `export * from "./file";\n` }
                 ]);
             });
         });
@@ -56,7 +56,7 @@ describe("Maintainer", () => {
             it("should have the correct files", () => {
                 checkBarrels(rootDir, [
                     { path: "index.ts", text: `export * from "./dir";\n` },
-                    { path: "dir/index.ts", text: `export * from "./file";\n` },
+                    { path: "dir/index.ts", text: `export * from "./file";\n` }
                 ]);
             });
         });
@@ -85,9 +85,9 @@ describe("Maintainer", () => {
                     { path: "entities/index.ts", text: `export * from "./person";\n` },
                     {
                         path: "random/index.ts",
-                        text: `export * from "./file1";\n` +
-                            `export * from "./file2";\n` +
-                            `export * from "./subDir";\n`
+                        text: `export * from "./file1";\n`
+                            + `export * from "./file2";\n`
+                            + `export * from "./subDir";\n`
                     },
                     { path: "random/subDir/index.ts", text: `export * from "./jsFile";\n` }
                 ]);
@@ -154,7 +154,7 @@ describe("Maintainer", () => {
                 checkBarrels(rootDir, [
                     { path: "dir/index.ts", text: `export * from "./subdir";\n` },
                     { path: "dir/subdir/index.ts", text: `export class MyClass {\n}\n` },
-                    { path: "dir/subdir/deeper/index.ts", text: `class MyClass {\n}\n` },
+                    { path: "dir/subdir/deeper/index.ts", text: `class MyClass {\n}\n` }
                 ]);
             });
         });
@@ -205,12 +205,12 @@ describe("Maintainer", () => {
             it("should have the correct files and put them in alphabetical order", () => {
                 checkBarrels(rootDir, [{
                     path: "dir/index.ts",
-                    text: `export * from "./a";\n` +
-                        `export * from "./b";\n` +
-                        `export * from "./c";\n` +
-                        `export * from "./d";\n` +
-                        `export * from "./E";\n` +
-                        `export * from "./f";\n`
+                    text: `export * from "./a";\n`
+                        + `export * from "./b";\n`
+                        + `export * from "./c";\n`
+                        + `export * from "./d";\n`
+                        + `export * from "./E";\n`
+                        + `export * from "./f";\n`
                 }]);
             });
         });
@@ -248,8 +248,8 @@ describe("Maintainer", () => {
             it("should keep the named export as-is", () => {
                 checkBarrels(rootDir, [{
                     path: "dir/index.ts",
-                    text: `export * from "./file1";\n` +
-                        `export {MyClass2} from "./file2";\n`
+                    text: `export * from "./file1";\n`
+                        + `export {MyClass2} from "./file2";\n`
                 }]);
             });
         });

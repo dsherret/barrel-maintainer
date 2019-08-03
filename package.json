@@ -8,8 +8,8 @@
   },
   "scripts": {
     "build": "rimraf dist && tsc",
-    "lint": "tslint src/**/*.ts",
-    "test": "rimraf dist && npm run build && nyc --reporter=html --reporter=text mocha dist/tests/**/*.js && npm run lint",
+    "format": "dprint \"**/*{.ts|.json}\"",
+    "test": "rimraf dist && npm run build && nyc --reporter=html --reporter=text mocha dist/tests/**/*.js",
     "dopublish": "npm run build && npm publish"
   },
   "repository": {
@@ -38,10 +38,10 @@
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.6.9",
     "chai": "^4.2.0",
+    "dprint": "^0.2.0",
     "mocha": "^6.2.0",
     "nyc": "^14.1.1",
     "rimraf": "^2.6.3",
-    "tslint": "^5.18.0",
     "typescript": "^3.5.3"
   },
   "nyc": {

@@ -6,7 +6,7 @@ describe("determineFileExtension", () => {
     function setup() {
         const project = new Project({ useVirtualFileSystem: true });
         const rootDir = project.createDirectory("rootDir");
-        return {project, rootDir};
+        return { project, rootDir };
     }
 
     it("should determine as js when there are no files", () => {
