@@ -14,7 +14,7 @@ export function watch(rootDir: Directory, directory: Directory, maintainer: Main
         try {
             let sourceFile = directory.getSourceFile(path);
             if (sourceFile == null) {
-                sourceFile = directory.addExistingSourceFileIfExists(path);
+                sourceFile = directory.addSourceFileAtPathIfExists(path);
                 if (sourceFile != null)
                     watchThrottler.addDirectory(sourceFile.getDirectory());
                 return;

@@ -4,7 +4,7 @@ import { determineFileExtension } from "./../../utils";
 
 describe("determineFileExtension", () => {
     function setup() {
-        const project = new Project({ useVirtualFileSystem: true });
+        const project = new Project({ useInMemoryFileSystem: true });
         const rootDir = project.createDirectory("rootDir");
         return { project, rootDir };
     }

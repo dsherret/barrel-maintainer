@@ -5,7 +5,7 @@ import { Maintainer } from "./../Maintainer";
 describe("Maintainer", () => {
     function setup(opts: { fileExtension?: "ts" | "js"; quoteStyle?: "\"" | "'"; includeRootDir?: boolean; } = {}) {
         const { fileExtension = "ts", quoteStyle, includeRootDir } = opts;
-        const project = new Project({ useVirtualFileSystem: true });
+        const project = new Project({ useInMemoryFileSystem: true });
         if (quoteStyle === "'")
             project.manipulationSettings.set({ quoteKind: QuoteKind.Single });
         const rootDir = project.createDirectory("rootDir");
@@ -29,7 +29,7 @@ describe("Maintainer", () => {
 
     describe("#updateDir()", () => {
         it("should determine the file extension", () => {
-            const project = new Project({ useVirtualFileSystem: true });
+            const project = new Project({ useInMemoryFileSystem: true });
             const rootDir = project.createDirectory("dir");
             rootDir.createSourceFile("dir/file.ts", "");
             const maintainer = new Maintainer(rootDir, {});

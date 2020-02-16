@@ -3,7 +3,7 @@ import { Project, Directory } from "ts-morph";
 import { DirectoryAncestorCollection } from "./../../utils";
 
 describe("DirectoryAncestorCollection", () => {
-    const project = new Project({ useVirtualFileSystem: true });
+    const project = new Project({ useInMemoryFileSystem: true });
     const rootDir = project.createDirectory("dir");
     const child1 = rootDir.createDirectory("child1");
     const child2 = rootDir.createDirectory("child2");

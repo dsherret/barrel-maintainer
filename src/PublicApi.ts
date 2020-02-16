@@ -28,7 +28,7 @@ export class PublicApi {
         dirPath = this.verifyAndGetPath(dirPath);
 
         const project = getProject(this.rootDirPath, this.options);
-        const dir = project.addExistingDirectory(dirPath);
+        const dir = project.addDirectoryAtPath(dirPath);
         const rootDir = project.getRootDirectories()[0];
         const maintainer = new Maintainer(rootDir, this.options);
 
@@ -45,7 +45,7 @@ export class PublicApi {
 
 export function getProject(dirPath: string, options: Options) {
     const project = new Project({ compilerOptions: { allowJs: true } });
-    project.addExistingSourceFiles([
+    project.addSourceFilesAtPaths([
         path.join(dirPath, "**/*.{js,ts,jsx,tsx}"),
         "!" + path.join(dirPath, "**/*.d.ts")
     ]);
