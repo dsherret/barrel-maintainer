@@ -37,7 +37,7 @@ describe("Maintainer", () => {
 
             it("should have the correct files", () => {
                 checkBarrels(rootDir, [
-                    { path: "dir/index.ts", text: `export * from "./file";\n` }
+                    { path: "dir/index.ts", text: `export * from "./file";\n` },
                 ]);
             });
         });
@@ -56,7 +56,7 @@ describe("Maintainer", () => {
             it("should have the correct files", () => {
                 checkBarrels(rootDir, [
                     { path: "index.ts", text: `export * from "./dir";\n` },
-                    { path: "dir/index.ts", text: `export * from "./file";\n` }
+                    { path: "dir/index.ts", text: `export * from "./file";\n` },
                 ]);
             });
         });
@@ -87,9 +87,9 @@ describe("Maintainer", () => {
                         path: "random/index.ts",
                         text: `export * from "./file1";\n`
                             + `export * from "./file2";\n`
-                            + `export * from "./subDir";\n`
+                            + `export * from "./subDir";\n`,
                     },
-                    { path: "random/subDir/index.ts", text: `export * from "./jsFile";\n` }
+                    { path: "random/subDir/index.ts", text: `export * from "./jsFile";\n` },
                 ]);
             });
         });
@@ -108,7 +108,7 @@ describe("Maintainer", () => {
             it("should have the correct files", () => {
                 checkBarrels(rootDir, [
                     { path: "random/index.ts", text: `export * from "./subDir";\n` },
-                    { path: "random/subDir/index.ts", text: `export * from "./jsFile";\n` }
+                    { path: "random/subDir/index.ts", text: `export * from "./jsFile";\n` },
                 ]);
             });
         });
@@ -134,7 +134,7 @@ describe("Maintainer", () => {
 
             it("should have the correct files", () => {
                 checkBarrels(rootDir, [
-                    { path: "random/index.ts", text: `export * from "./file1";\n` }
+                    { path: "random/index.ts", text: `export * from "./file1";\n` },
                 ]);
             });
         });
@@ -154,7 +154,7 @@ describe("Maintainer", () => {
                 checkBarrels(rootDir, [
                     { path: "dir/index.ts", text: `export * from "./subdir";\n` },
                     { path: "dir/subdir/index.ts", text: `export class MyClass {\n}\n` },
-                    { path: "dir/subdir/deeper/index.ts", text: `class MyClass {\n}\n` }
+                    { path: "dir/subdir/deeper/index.ts", text: `class MyClass {\n}\n` },
                 ]);
             });
         });
@@ -184,7 +184,7 @@ describe("Maintainer", () => {
             it("should have the correct files", () => {
                 checkBarrels(rootDir, [{
                     path: "dir/index.ts",
-                    text: `export * from "./file";\n`
+                    text: `export * from "./file";\n`,
                 }]);
             });
         });
@@ -210,7 +210,7 @@ describe("Maintainer", () => {
                         + `export * from "./c";\n`
                         + `export * from "./d";\n`
                         + `export * from "./E";\n`
-                        + `export * from "./f";\n`
+                        + `export * from "./f";\n`,
                 }]);
             });
         });
@@ -227,13 +227,13 @@ describe("Maintainer", () => {
             it("should have the correct files", () => {
                 checkBarrels(rootDir, [{
                     path: "dir/index.ts",
-                    text: `export * from "./subdir";\n`
+                    text: `export * from "./subdir";\n`,
                 }, {
                     path: "dir/subdir/index.ts",
-                    text: `export * from "./deeper";\nexport * from "./file";\n`
+                    text: `export * from "./deeper";\nexport * from "./file";\n`,
                 }, {
                     path: "dir/subdir/deeper/index.ts",
-                    text: `export * from "./file";\n`
+                    text: `export * from "./file";\n`,
                 }]);
             });
         });
@@ -249,7 +249,7 @@ describe("Maintainer", () => {
                 checkBarrels(rootDir, [{
                     path: "dir/index.ts",
                     text: `export * from "./file1";\n`
-                        + `export {MyClass2} from "./file2";\n`
+                        + `export {MyClass2} from "./file2";\n`,
                 }]);
             });
         });
@@ -262,7 +262,7 @@ describe("Maintainer", () => {
             it("should have the correct files", () => {
                 checkBarrels(rootDir, [{
                     path: "dir/index.js",
-                    text: `export * from './file';\n`
+                    text: `export * from './file';\n`,
                 }]);
             });
         });

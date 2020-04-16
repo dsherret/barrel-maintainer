@@ -47,7 +47,7 @@ export function getProject(dirPath: string, options: Options) {
     const project = new Project({ compilerOptions: { allowJs: true } });
     project.addSourceFilesAtPaths([
         path.join(dirPath, "**/*.{js,ts,jsx,tsx}"),
-        "!" + path.join(dirPath, "**/*.d.ts")
+        "!" + path.join(dirPath, "**/*.d.ts"),
     ]);
 
     if (options.quoteType === "'")

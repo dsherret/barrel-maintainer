@@ -11,7 +11,7 @@ describe("DirectoryAncestorCollection", () => {
 
     function testDirs(collection: DirectoryAncestorCollection, dirs: Directory[]) {
         expect(collection.getAll().map(d => d.getPath()).sort()).to.deep.equal(
-            dirs.map(d => d.getPath()).sort()
+            dirs.map(d => d.getPath()).sort(),
         );
     }
 

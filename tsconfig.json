@@ -7,6 +7,7 @@
     "outDir": "dist",
     "removeComments": true,
     "strict": true,
+    "newLine": "lf",
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "allowSyntheticDefaultImports": true,

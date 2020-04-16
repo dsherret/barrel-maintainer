@@ -9,7 +9,7 @@ export function watch(rootDir: Directory, directory: Directory, maintainer: Main
     const watcher = chokidar.watch([path.join(directory.getPath(), "**/*.{ts,js,tsx,jsx}"), "!" + path.join(directory.getPath(), "**/*.d.ts")], {
         ignorePermissionErrors: true,
         usePolling: true,
-        interval: 300
+        interval: 300,
     }).on("all", async (event: string, path: string) => {
         try {
             let sourceFile = directory.getSourceFile(path);
@@ -36,7 +36,7 @@ export function watch(rootDir: Directory, directory: Directory, maintainer: Main
     return {
         stop: () => {
             watcher.removeAllListeners();
-        }
+        },
     };
 }
 

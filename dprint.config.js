@@ -10,17 +10,17 @@ module.exports.config = {
         new TypeScriptPlugin({
             useBraces: "preferNone",
             singleBodyPosition: "nextLine",
-            preferHanging: true,
             nextControlFlowPosition: "nextLine",
-            "arrowFunctionExpression.useParentheses": "preferNone",
+            "arrowFunction.useParentheses": "preferNone",
             "tryStatement.nextControlFlowPosition": "sameLine",
-            "quoteStyle": "alwaysDouble"
+            "quoteStyle": "alwaysDouble",
+            "semiColons": "always",
         }),
         new JsoncPlugin({
-            indentWidth: 2
-        })
+            indentWidth: 2,
+        }),
     ],
     includes: [
-        "**/*{.ts,.tsx,.json,.js}"
-    ]
+        "**/*{.ts,.tsx,.json,.js}",
+    ],
 };

@@ -13,7 +13,7 @@ export function parseCommandLineArgs(args: string[]): CommandLineOptions {
         quoteType: getQuoteType(),
         includeRootDir: argv.hasOwnProperty("includeRootDir"),
         showHelp: argv.hasOwnProperty("h") || argv.hasOwnProperty("help"),
-        showVersion: argv.hasOwnProperty("v") || argv.hasOwnProperty("version")
+        showVersion: argv.hasOwnProperty("v") || argv.hasOwnProperty("version"),
     };
 
     function getPath() {
