@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "rimraf dist && tsc",
-    "format": "dprint",
+    "format": "dprint fmt",
     "test": "rimraf dist && npm run build && nyc --reporter=html --reporter=text mocha dist/tests/**/*.js",
     "dopublish": "npm run build && npm publish"
   },
@@ -28,23 +28,20 @@
   "homepage": "https://github.com/dsherret/barrel-maintainer#readme",
   "dependencies": {
     "@types/minimist": "^1.2.0",
-    "chokidar": "^3.3.1",
+    "chokidar": "^3.4.1",
     "minimist": "^1.2.5",
-    "ts-morph": "7.0.2"
+    "ts-morph": "7.1.2"
   },
   "devDependencies": {
     "@types/chai": "^4.2.11",
     "@types/chokidar": "^2.1.3",
-    "@types/mocha": "^7.0.2",
-    "@types/node": "^13.11.1",
+    "@types/mocha": "^8.0.0",
+    "@types/node": "^14.0.23",
     "chai": "^4.2.0",
-    "dprint": "^0.11.1",
-    "dprint-plugin-jsonc": "^0.6.0",
-    "dprint-plugin-typescript": "^0.17.2",
-    "mocha": "^7.1.1",
-    "nyc": "^15.0.1",
+    "mocha": "^8.0.1",
+    "nyc": "^15.1.0",
     "rimraf": "^3.0.2",
-    "typescript": "^3.8.3"
+    "typescript": "^3.9.7"
   },
   "nyc": {
     "exclude": [

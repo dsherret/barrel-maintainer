@@ -22,18 +22,18 @@ barrel-maintainer [options] [path]
 
 Options:
 
-* `--includeRootDir` - Create a barrel in the root directory.
-* Quote type (specify one)
-    * Defaults to the quote type used in the first found import declaration in your project.
-    * `--singleQuotes` - Use single quotes.
-    * `--doubleQuotes` - Use double quotes.
-* File extension for barrel (specify one)
-    * Defaults to whichever file type your project has more of.
-    * `--ts` - Create index.ts files.
-    * `--js` - Create index.js files.
-* New lines (specify one)
-    * `--crlf` - Use carriage return line feed newlines (default on windows)
-    * `--lf` - Use line feed newlines (default elsewhere)
+- `--includeRootDir` - Create a barrel in the root directory.
+- Quote type (specify one)
+  - Defaults to the quote type used in the first found import declaration in your project.
+  - `--singleQuotes` - Use single quotes.
+  - `--doubleQuotes` - Use double quotes.
+- File extension for barrel (specify one)
+  - Defaults to whichever file type your project has more of.
+  - `--ts` - Create index.ts files.
+  - `--js` - Create index.js files.
+- New lines (specify one)
+  - `--crlf` - Use carriage return line feed newlines (default on windows)
+  - `--lf` - Use line feed newlines (default elsewhere)
 
 ## Ignoring Files
 
@@ -59,11 +59,11 @@ export ClassB {}
 export * from "./classes";
 ```
 
-If you want the barrel to export a subset of the exports from *classes.js*, then edit the barrel to say so:
+If you want the barrel to export a subset of the exports from _classes.js_, then edit the barrel to say so:
 
 ```js
 // index.js
-export {ClassA} from "./classes";
+export { ClassA } from "./classes";
 ```
 
 These kind of changes won't be overwritten by the code manipulation.
@@ -77,7 +77,7 @@ const maintainer = new BarrelMaintainer("myProject/src/", {
     includeRootDir: false,
     fileExtension: "js", // or "ts" (extension for barrel)
     quoteType: "'", // or "\""
-    newLineType: "\r\n" // or "\n"
+    newLineType: "\r\n", // or "\n"
 });
 
 await maintainer.updateDirectory("myProject/src/subdir");
